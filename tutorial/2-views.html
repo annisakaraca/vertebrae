@@ -26,8 +26,8 @@ var Comment = Backbone.Model.extend({
   initialize: function(message) {
     /* Set the initial values for `votes` to 0 and `message` to the message.
      * Remember to use setters when working with attributes! */
-    this.votes = 0;
-    this.message = message;
+    this.set('votes',0);
+    this.set('message', message);
   },
   votes: function() {
     /* Return the votes attribute on this model.
@@ -36,9 +36,7 @@ var Comment = Backbone.Model.extend({
   },
   upvote: function(){
     // Set the `votes` attribute to the current vote count plus one.
-    console.log('upvoting!');
-    console.dir(this.votes);
-    this.set('this.votes':5);
+    this.set('votes', this.get('votes') + 1);
   },
   // Add a downvote function; don't forget the comma above.
   downvote: function(){
@@ -90,14 +88,13 @@ var CommentView = Backbone.View.extend({
   // Now that we have an event listener calling `render`, we must define it:
   render: function() {
     // As in step2, we define a template:
-    console.log(this.model.message);
     var html = [
       '<div>',
         '<span class="votes">',
-          this.model.votes,
+          this.model.get('votes'),
         '<span>',
         '<span class="comment">',
-          this.model.message,
+          this.model.get('message'),
         '</span>',
         '</br>',
       '</div>'
